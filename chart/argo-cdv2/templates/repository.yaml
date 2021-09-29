@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argocd-repo
+  labels:
+    app.kubernetes.io/name: {{ include "argo-cd.name" . }}-repo
+    helm.sh/chart: {{ include "argo-cd.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/component: {{ .Values.server.name }}
+stringData:
+  url: git@172.31.201.56:/home/git/repository.git
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    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
+    -----END OPENSSH PRIVATE KEY-----
