@@ -7,10 +7,6 @@ spec:
   activeDeadlineSeconds: 100
   template:
     spec:
-      {{- with .Values.configuration.imagePullSecrets }}
-      imagePullSecrets:
-      {{- toYaml . | nindent 8 }}
-      {{- end }}
       containers:
         - name: {{ .Values.configuration.realm }}-init
           image: {{ .Values.configuration.image.repository | default "verosteam/keycloak-idp-setup" }}:{{ .Values.configuration.image.tag | default .Chart.AppVersion }}
