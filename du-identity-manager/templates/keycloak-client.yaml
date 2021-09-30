@@ -1,0 +1,15 @@
+{{- $values := . -}}
+{{- range .Values.clients }}
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: {{ .name }}
+  labels:
+  {{- include "du-identity-manager.labels" $values | nindent 4 }}
+spec:
+  realmSelector:
+    matchLabels:
+    {{- include "du-identity-manager.selectorLabels" $values | nindent 6 }}
+  client:
+  {{- .client | toYaml | nindent 8 }}
+{{- end}}

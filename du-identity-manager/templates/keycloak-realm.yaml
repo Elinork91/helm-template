@@ -1,0 +1,23 @@
+{{- $values := . -}}
+{{- range .Values.realms }}
+
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: {{ .name }}
+  labels:
+  {{- include "du-identity-manager.labels" $values | nindent 4 }}
+spec:
+    realm:
+        id: {{ .id }}
+        realm: {{ .realm }}
+        enabled: {{ .enabled }}
+        displayName: {{ .displayName }}
+{{- with .identityProviders }}
+        identityProviders:
+            {{- toYaml . | nindent 12 }}
+{{- end }}
+    instanceSelector:
+      matchLabels:
+        {{- include "du-identity-manager.selectorLabels" $values | nindent 8 }}
+{{- end}}

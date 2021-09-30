@@ -1,15 +1,15 @@
 apiVersion: keycloak.org/v1alpha1
 kind: Keycloak
 metadata:
-  name: {{ include "keycloak.fullname" . }}
+  name: {{ include "du-identity-manager.fullname" . }}
   labels:
-  {{- include "keycloak.labels" . | nindent 4 }}
+  {{- include "du-identity-manager.labels" . | nindent 4 }}
 spec:
   instances: {{ .Values.replicaCount }}
   externalAccess:
     enabled: {{ .Values.keycloak.externalAccess.enabled }}
   externalDatabase:
-    enabled: {{ .Values.keycloak.externalDatabase.enabled }}
+    enabled: True
   keycloakDeploymentSpec:
     experimental:
       args:
@@ -17,9 +17,3 @@ spec:
       env:
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
-        - name: KEYCLOAK_USER
-          value: "admin"
-        - name: KEYCLOAK_PASSWORD
-          value: "admin"
-        - name: NODE_TLS_REJECT_UNAUTHORIZED
-          value: "0"

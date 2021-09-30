@@ -1,0 +1,19 @@
+{{- if .Values.cert.enabled -}}
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ include "du-identity-manager.fullname" . }}
+spec:
+  secretName: {{ .Values.cert.secretName }}
+  issuerRef:
+    name: {{ .Values.cert.issuer }}
+    kind: {{ .Values.cert.issuerKind }}
+  duration: {{ .Values.cert.duration }}
+  renewBefore: {{ .Values.cert.renewBefore }}
+  dnsNames:
+    - keycloak.{{ .Release.Namespace }}.svc.cluster.local
+    - keycloak.{{ .Release.Namespace }}.svc.cluster
+    - keycloak.{{ .Release.Namespace }}.svc
+    - keycloak.{{ .Release.Namespace }}
+    - keycloak
+{{- end -}}
