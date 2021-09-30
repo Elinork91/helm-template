@@ -22,4 +22,9 @@ spec:
         - name: keycloak-idp-{{ .Values.configuration.realm }}
           configMap:
             name: keycloak-idp-{{ .Values.configuration.realm }}
+      ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
       restartPolicy: OnFailure
