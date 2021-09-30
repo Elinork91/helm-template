@@ -28,7 +28,6 @@ configuration:
   port: 8443
   masterRealm: master
   path: /auth
-  secret: credential-du-identity-manager-digital-us
   identityProviders:
     - name: azure-km
       mappers:
