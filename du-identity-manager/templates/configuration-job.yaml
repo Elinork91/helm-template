@@ -18,13 +18,14 @@ spec:
           volumeMounts:
             - name: keycloak-idp-{{ .Values.configuration.realm }}
               mountPath: /app/config/
-      volumes:
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: https
+              containerPort: 8443
+     volumes:
         - name: keycloak-idp-{{ .Values.configuration.realm }}
           configMap:
             name: keycloak-idp-{{ .Values.configuration.realm }}
-      ports:
-        - name: http
-          containerPort: 8080
-        - name: https
-          containerPort: 8443
+     
       restartPolicy: OnFailure
