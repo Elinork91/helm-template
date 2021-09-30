@@ -89,7 +89,6 @@ clients:
         "clientId": "sui",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "ad4ca606-1472-4db5-b1b9-53e9fe90609b",
         "redirectUris": [
@@ -208,7 +207,6 @@ clients:
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "7721f50e-f57d-490f-ae93-e53a79f5408e",
         "redirectUris": [
@@ -252,7 +250,6 @@ clients:
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "2af6562f-98a7-4017-9061-b7a58ebf8a73",
         "redirectUris": [
@@ -296,7 +293,6 @@ clients:
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "faa80e83-820f-45e4-941c-832a8081385f",
         "redirectUris": [
@@ -340,7 +336,6 @@ clients:
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "635c7493-cb0e-4cd9-99c4-aa7a19f805f2",
         "redirectUris": [
@@ -384,7 +379,6 @@ clients:
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "f469d692-5f32-4312-b16a-512b0af83317",
         "redirectUris": [
@@ -428,7 +422,6 @@ clients:
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "ae46e200-960c-45c8-8eff-2e3f0e1b4f8e",
         "redirectUris": [
@@ -472,7 +465,6 @@ clients:
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
-        "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "149c5bdc-6d67-4716-96ea-da7565f66bdf",
         "redirectUris": [
