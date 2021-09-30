@@ -20,7 +20,8 @@ ingress:
 
 configuration:
   image:
-    tag: 1.0.0
+    tag: 11.0.3
+    repository: quay.io/keycloak/keycloak
   realm: kmrealm
   protocol: https
   host: keycloak
