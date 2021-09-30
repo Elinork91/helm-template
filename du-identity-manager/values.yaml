@@ -25,6 +25,8 @@ configuration:
   realm: kmrealm
   protocol: https
   host: keycloak
+  adminUser: admin
+  adminPasswd: admin
   port: 8443
   masterRealm: master
   path: /auth

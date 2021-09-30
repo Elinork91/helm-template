@@ -11,16 +11,10 @@ spec:
         - name: {{ .Values.configuration.realm }}-init
           image: {{ .Values.configuration.image.repository | default "verosteam/keycloak-idp-setup" }}:{{ .Values.configuration.image.tag | default .Chart.AppVersion }}
           env:
-            - name: KEYCLOAK_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.configuration.secret }}
-                  key: ADMIN_USERNAME
+            - name: KEYCLOAK_USER
+              value: {{ .Values.configuration.adminUser }}
             - name: KEYCLOAK_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.configuration.secret }}
-                  key: ADMIN_PASSWORD
+              value: {{ .Values.configuration.adminPasswd }}
             - name: NODE_TLS_REJECT_UNAUTHORIZED
               value: "0"
           volumeMounts:
