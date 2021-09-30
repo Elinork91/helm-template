@@ -15,17 +15,16 @@ spec:
               value: {{ .Values.configuration.adminPasswd }}
             - name: NODE_TLS_REJECT_UNAUTHORIZED
               value: "0"
-          volumeMounts:
-            - name: keycloak-idp-{{ .Values.configuration.realm }}
-              mountPath: /app/config/
           ports:
             - name: http
               containerPort: 8080
             - name: https
-              containerPort: 8443
-     volumes:
+              containerPort: 8443          
+          volumeMounts:
+            - name: keycloak-idp-{{ .Values.configuration.realm }}
+              mountPath: /app/config/
+      volumes:
         - name: keycloak-idp-{{ .Values.configuration.realm }}
           configMap:
             name: keycloak-idp-{{ .Values.configuration.realm }}
-     
       restartPolicy: OnFailure
