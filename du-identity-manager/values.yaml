@@ -81,6 +81,7 @@ keycloak:
   istancences: 1
   externalAccess:
     enabled: False
+
 clients:
   - name: sui
     realm: kmrealm
@@ -501,6 +502,7 @@ clients:
 
 users:
   - name: operator
+    realm: cspadmin
     user:
       username: "operator"
       firstName: "operator"
