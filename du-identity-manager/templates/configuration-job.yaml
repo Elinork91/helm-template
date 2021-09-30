@@ -3,8 +3,6 @@ kind: Job
 metadata:
   name: keycloak-idp-config-{{ .Values.configuration.realm }}
 spec:
-  backoffLimit: 5
-  activeDeadlineSeconds: 100
   template:
     spec:
       containers:
