@@ -3,6 +3,8 @@ kind: Job
 metadata:
   name: keycloak-idp-config-{{ .Values.configuration.realm }}
 spec:
+  backoffLimit: 5
+  activeDeadlineSeconds: 100
   template:
     spec:
       {{- with .Values.configuration.imagePullSecrets }}
@@ -13,15 +15,23 @@ spec:
         - name: {{ .Values.configuration.realm }}-init
           image: {{ .Values.configuration.image.repository | default "verosteam/keycloak-idp-setup" }}:{{ .Values.configuration.image.tag | default .Chart.AppVersion }}
           env:
-            - name: KEYCLOAK_USER
-              value: "admin"
+            - name: KEYCLOAK_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.configuration.secret }}
+                  key: ADMIN_USERNAME
             - name: KEYCLOAK_PASSWORD
-              value: "admin"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.configuration.secret }}
+                  key: ADMIN_PASSWORD
             - name: NODE_TLS_REJECT_UNAUTHORIZED
               value: "0"
-          ports:
-            - name: http
-              containerPort: 8080
-            - name: https
-              containerPort: 8443
+          volumeMounts:
+            - name: keycloak-idp-{{ .Values.configuration.realm }}
+              mountPath: /app/config/
+      volumes:
+        - name: keycloak-idp-{{ .Values.configuration.realm }}
+          configMap:
+            name: keycloak-idp-{{ .Values.configuration.realm }}
       restartPolicy: OnFailure

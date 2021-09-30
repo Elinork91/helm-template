@@ -6,6 +6,7 @@ kind: KeycloakRealm
 metadata:
   name: {{ .name }}
   labels:
+    realm: {{ .name }}
   {{- include "du-identity-manager.labels" $values | nindent 4 }}
 spec:
     realm:
@@ -20,4 +21,5 @@ spec:
     instanceSelector:
       matchLabels:
         {{- include "du-identity-manager.selectorLabels" $values | nindent 8 }}
+---
 {{- end}}

@@ -1,7 +1,7 @@
 {{- $values := . -}}
-{{- range .Values.clients }}
+{{- range .Values.users }}
 apiVersion: keycloak.org/v1alpha1
-kind: KeycloakClient
+kind: KeycloakUser
 metadata:
   name: {{ .name }}
   labels:
@@ -11,7 +11,7 @@ spec:
     matchLabels:
       realm: {{ .realm }}
     {{- include "du-identity-manager.selectorLabels" $values | nindent 6 }}
-  client:
-  {{- .client | toYaml | nindent 8 }}
+  user:
+    {{- .user | toYaml | nindent 3 }}
 ---
 {{- end}}
