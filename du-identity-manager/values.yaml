@@ -181,7 +181,6 @@ clients:
           "display.on.consent.screen": "false",
           "saml.onetimeuse.condition": "false"
         },
-        "authenticationFlowBindingOverrides": {},
         "fullScopeAllowed": true,
         "nodeReRegistrationTimeout": -1,
         "defaultClientScopes": [
@@ -535,7 +534,6 @@ realms:
           "displayName": "azure-km",
           "providerId": "oidc",
           "enabled": true,
-          "updateProfileFirstLoginMode": "off",
           "trustEmail": false,
           "storeToken": true,
           "addReadTokenRoleOnCreate": true,
@@ -563,7 +561,6 @@ realms:
           "displayName": "azure-km-dwp",
           "providerId": "oidc",
           "enabled": true,
-          "updateProfileFirstLoginMode": "off",
           "trustEmail": false,
           "storeToken": true,
           "addReadTokenRoleOnCreate": true,
