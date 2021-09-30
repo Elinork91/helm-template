@@ -539,7 +539,6 @@ realms:
           "trustEmail": false,
           "storeToken": true,
           "addReadTokenRoleOnCreate": true,
-          "authenticateByDefault": false,
           "linkOnly": false,
           "firstBrokerLoginFlowAlias": "first broker login",
           "config": {
@@ -568,7 +567,6 @@ realms:
           "trustEmail": false,
           "storeToken": true,
           "addReadTokenRoleOnCreate": true,
-          "authenticateByDefault": false,
           "linkOnly": false,
           "firstBrokerLoginFlowAlias": "first broker login",
           "config": {
