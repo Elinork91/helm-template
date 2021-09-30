@@ -1,0 +1,25 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: {{ include "keycloak.fullname" . }}
+  labels:
+  {{- include "keycloak.labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.replicaCount }}
+  externalAccess:
+    enabled: {{ .Values.keycloak.externalAccess.enabled }}
+  externalDatabase:
+    enabled: {{ .Values.keycloak.externalDatabase.enabled }}
+  keycloakDeploymentSpec:
+    experimental:
+      args:
+        - "-Djboss.as.management.blocking.timeout=600"
+      env:
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        - name: KEYCLOAK_USER
+          value: "admin"
+        - name: KEYCLOAK_PASSWORD
+          value: "admin"
+        - name: NODE_TLS_REJECT_UNAUTHORIZED
+          value: "0"
