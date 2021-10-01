@@ -25,6 +25,25 @@ We truncate to 20 characters because this is used to set the node identifier in 
 {{- end }}
 
 {{/*
+Create a default fully qualified app name.
+We truncate to 20 characters because this is used to set the node identifier in WildFly which is limited to
+23 characters. This allows for a replica suffix for up to 99 replicas.
+*/}}
+{{- define "du-identity-manager.fullname" -}}
+{{- if .Values.fullnameOverride }}
+{{- .Values.fullnameOverride | trunc 20 | trimSuffix "-" }}
+{{- else }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- if contains $name .Release.Name }}
+{{- .Release.Name | trunc 20 | trimSuffix "-" }}
+{{- else }}
+{{- printf "%s-%s" .Release.Name $name | trunc 20 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+{{- end }}
+
+
+{{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "keycloak.chart" -}}
