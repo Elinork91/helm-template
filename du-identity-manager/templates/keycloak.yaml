@@ -9,7 +9,7 @@ spec:
   externalAccess:
     enabled: {{ .Values.keycloak.externalAccess.enabled }}
   externalDatabase:
-    enabled: True
+    enabled: False
   keycloakDeploymentSpec:
     experimental:
       args:
