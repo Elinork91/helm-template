@@ -1,0 +1,180 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  revisionHistoryLimit: {{ default .Values.global.revisionHistoryLimit 1 }}
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/grafana-configmap.yaml") . | sha256sum }}
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - image: grafana/{{ default "grafana:5.4.3" .Values.global.tags.ch_grafana }}
+          name: grafana
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          ports:
+            - containerPort: 3000
+          env:
+            - name: GF_SERVER_ROOT_URL
+              value: "%(protocol)s://%(domain)s:%(http_port)s/grafana/?(.*)"
+            - name: GF_USERS_ALLOW_SIGN_UP
+              value: {{ default .Values.grafana.userSignup .Values.global.grafana.userSignup | quote}}
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: {{ default .Values.grafana.anonymousAccess .Values.global.grafana.anonymousAccess | quote}}
+            - name: GF_SECURITY_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-secret
+                  key: username
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: grafana-secret
+                  key: password
+            - name: GF_INSTALL_PLUGINS
+              value: "grafana-piechart-panel,vonage-status-panel"
+          volumeMounts:
+            - name: grafana-volume
+              mountPath: /var/lib/grafana
+            - name: grafana-datasources-config-volume
+              mountPath: /etc/grafana/provisioning/datasources
+            - name: grafana-dashboards-location-config-volume
+              mountPath: /var/lib/grafana/dashboards
+            - name: grafana-dashboards-config-volume
+              mountPath: /etc/grafana/provisioning/dashboards
+      {{- with .Values.grafana.deployment.imagePullSecrets }}
+      imagePullSecrets:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      restartPolicy: Always
+      volumes:
+        - name: grafana-volume
+          emptyDir: {}
+        - configMap:
+            name: grafana-datasources-config
+          name: grafana-datasources-config-volume
+        - configMap:
+            name: grafana-dashboards-config
+          name: grafana-dashboards-config-volume
+        - configMap:
+            name: grafana-dashboards-location-config
+          name: grafana-dashboards-location-config-volume
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  serviceName: "prometheus"
+  replicas: {{ default .Values.prometheus.replicas 1 }}
+  revisionHistoryLimit: {{ default .Values.global.revisionHistoryLimit 1}}
+  selector:
+    matchLabels:
+      app: prometheus
+  volumeClaimTemplates:
+    - metadata:
+        name: prometheus-volume
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 8Gi
+  template:
+    metadata:
+      labels:
+        app: prometheus
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+    spec:
+      # REMOVED UNTIL UNDERSTAND WHY DON'T WORK ON K8S 1.21
+      # securityContext:
+      #   runAsGroup: 65534
+      #   fsGroup: 65534
+      #   runAsUser: 65534
+      #   runAsNonRoot: true
+      serviceAccountName: {{ .Values.prometheus.serviceAccount.name }}
+      initContainers:
+        - name: change-volume-permissions
+          image: busybox:1.33.1
+          command: ['sh', '-c', 'ls -la / && ls -la /prometheus && id && mkdir -p /prometheus/data && chown -R 65534:65534 /prometheus']
+          volumeMounts:
+            - mountPath: /prometheus
+              name: prometheus-volume
+      containers:
+        - args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.retention.time=7d"
+          command:
+            - /bin/prometheus
+          image: prom/prometheus:{{ default "v2.7.2" .Values.global.tags.ch_prometheus }}
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          name: prometheus
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/prometheus
+              name: prometheus-config-volume
+            - mountPath: /prometheus
+              name: prometheus-volume
+      {{- with .Values.prometheus.deployment.imagePullSecrets }}
+      imagePullSecrets:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: prometheus-config
+          name: prometheus-config-volume
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-blackbox-exporter
+  labels:
+    app: prometheus-blackbox-exporter
+spec:
+  replicas: 1
+  revisionHistoryLimit: {{ default 1 .Values.global.revisionHistoryLimit}}
+  selector:
+    matchLabels:
+      app: prometheus-blackbox-exporter
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        app: prometheus-blackbox-exporter
+    spec:
+      containers:
+        - image: prom/blackbox-exporter:{{ default "v0.13.0" .Values.global.tags.ch_prometheus_blackbox_exporter }}
+          name: prometheus-blackbox-exporter
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          ports:
+            - containerPort: 9115
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: prometheus-blackbox-exporter-volume
+      {{- with .Values.prometheusBlackbox.deployment.imagePullSecrets }}
+      imagePullSecrets:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      restartPolicy: Always
+      volumes:
+        - name: prometheus-blackbox-exporter-volume
+          configMap:
+            name: prometheus-blackbox-exporter-config

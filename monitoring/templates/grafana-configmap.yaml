@@ -1,0 +1,96 @@
+---
+kind: ConfigMap
+metadata:
+  name: grafana-datasources-config
+apiVersion: v1
+data:
+  prometheus_datasource.yaml: |-
+    apiVersion: 1
+
+    deleteDatasources:
+      - name: Prometheus
+        orgId: 1
+
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      orgId: 1
+      url: http://prometheus:9090
+      basicAuth: false
+      editable: true
+  elastic_datasource.yaml: |-
+    apiVersion: 1
+
+    deleteDatasources:
+      - name: Elastic
+        orgId: 1
+
+    datasources:
+    - name: Elastic
+      type: elasticsearch
+      access: proxy
+      database: "[fluentd-digital-us-]YYYY.MM.DD"
+      url: {{ .Values.global.elasticsearch.url }}
+      editable: true
+      basicAuth: true
+      basicAuthUser: {{ .Values.global.elasticsearch.username }}
+      basicAuthPassword: {{ .Values.global.elasticsearch.password }}
+      jsonData:
+        tlsSkipVerify: {{ .Values.global.elasticsearch.tlsSkipVerify}}
+        interval: Daily
+        timeField: "@timestamp"
+    - name: Elastic-jaeger
+      type: elasticsearch
+      access: proxy
+      database: "[jaeger-jaeger-span-]YYYY-MM-DD"
+      url: {{ .Values.global.elasticsearch.url }}
+      editable: true
+      basicAuth: true
+      basicAuthUser: {{ .Values.global.elasticsearch.username }}
+      basicAuthPassword: {{ .Values.global.elasticsearch.password }}
+      jsonData:
+        tlsSkipVerify: {{ .Values.global.elasticsearch.tlsSkipVerify}}
+        interval: Daily
+        timeField: "startTimeMillis"
+        logMessageField: serviceName
+---
+#        esVersion: 6.0+
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-config
+apiVersion: v1
+data:
+  dashboard_location.yaml: |-
+    apiVersion: 1
+
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: 'file'
+      disableDeletion: false
+      updateIntervalSeconds: 10
+      options:
+        path: '/var/lib/grafana/dashboards'
+---
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards-location-config
+apiVersion: v1
+data:
+{{ (.Files.Glob "dashboards/jaeger-span.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/disk-dashboard.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/efk.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/cpu-mem-usage.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/warn-logs.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/err-logs.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/rabbitmq.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/dead-letters.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/consumers.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/kube-metrics.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/network-load.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/health.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/connector-metrics.json").AsConfig | nindent 2}}
+{{ (.Files.Glob "dashboards/m365-calls.json").AsConfig | nindent 2}}
+---

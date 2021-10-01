@@ -1,0 +1,25 @@
+appArgocd:
+  gitRevision: "final" #-> alpha | beta | rc | final | vX.X.X
+  hostDomain: {}
+  sourceRepo: "PLACE_HOLDER"
+  destinationServer: https://kubernetes.default.svc
+  projectName: "PLACE_HOLDER"
+
+monitoring:
+  enableDeploy: true
+  grafana:
+    username: "ARGO_GRAFANA_USERNAME"
+    password: "ARGO_GRAFANA_PASSWORD"
+    userSignup: 'false'
+    anonymousAccess: 'false'
+    ingress:
+      enabled: 'true'
+    deployment:
+      imagePullSecretsName: "docker.io"
+  prometheusBlackbox:
+    deployment:
+      imagePullSecretsName: "docker.io"
+
+global:
+  syncPolicy:
+    {}

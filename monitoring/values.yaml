@@ -1,0 +1,52 @@
+global:
+  image:
+    pullPolicy: IfNotPresent
+  elasticsearch:
+    url: https://elasticsearch-es-http.elastic-system.svc.cluster.local:9200
+    username: elastic
+    password: KMadmin2018
+    tlsSkipVerify: true
+  serviceType: ClusterIP
+  grafana:
+    username: admin
+    password: "Wish-Praise-Engineer-Come-6"
+    userSignup: false
+    anonymousAccess: false
+  rabbitmq:
+    username: guest
+    password: guest
+  tags:
+    ch_grafana: grafana:7.5.2
+    ch_prometheus_blackbox_exporter: v0.13.0
+    ch_prometheus: v2.7.2
+    node_exporter: "v1.0.1"
+    default: latest
+
+grafana:
+  ingress:
+#    host: host.publicdomain.com
+    tls: []
+    enabled: true
+    annotations:
+      {}
+  deployment:
+    imagePullSecrets:
+      - name: "docker.io"
+
+prometheus:
+  deployment: {}
+  serviceAccount:
+    create: true
+    name: prometheus-account
+    annotations: {}
+
+prometheusBlackbox:
+  deployment:
+    imagePullSecrets:
+      - name: docker.io
+
+rabbitmq:
+  servicePort: 5672
+  mgmtPort: 15672
+  metricsPort: 15692
+  metrics: /metrics

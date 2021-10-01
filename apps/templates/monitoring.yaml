@@ -1,0 +1,48 @@
+{{- if .Values.monitoring.enableDeploy }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring-{{ .Values.appArgocd.projectName }}
+  labels:
+    argo-project: "argo-{{ .Values.appArgocd.projectName }}"
+spec:
+  project: "{{ .Values.appArgocd.projectName }}"
+  source:
+    repoURL: "{{ .Values.appArgocd.sourceRepo }}"
+    targetRevision: "{{ .Values.appArgocd.gitRevision }}"
+    path: monitoring
+    # helm specific config
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        #grafana
+        - name: global.grafana.username
+          value: {{ .Values.monitoring.grafana.username }}
+        - name: global.grafana.password
+          value: {{ .Values.monitoring.grafana.password }}
+        - name: global.grafana.userSignup
+          value: {{ .Values.monitoring.grafana.userSignup |quote }}
+        - name: global.grafana.anonymousAccess
+          value: {{ .Values.monitoring.grafana.anonymousAccess |quote }}
+        - name: grafana.ingress.enabled
+          value: {{ .Values.monitoring.grafana.ingress.enabled |quote }}
+        - name: grafana.deployment.imagePullSecrets[0].name
+          value: {{ .Values.monitoring.grafana.deployment.imagePullSecretsName }}
+
+      # Values file as block file
+      # values: |
+      #   grafana:
+      #     deployment:
+      #       imagePullSecrets:
+      #         - name: "docker.io"
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: "{{ .Values.appArgocd.destinationServer }}"
+
+  # Sync policy
+  syncPolicy:
+  {{- .Values.global.syncPolicy | toYaml | nindent 4}}
+
+{{- end }}
