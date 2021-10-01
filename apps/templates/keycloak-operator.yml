@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak-operator-{{ .Release.Namespace }}
+  namespace: argocd
+  labels:
+    argo-project: "argo-{{ .Release.Namespace }}"
+spec:
+  project: "{{ .Release.Namespace }}"
+
+  source:
+    repoURL: "{{ .Values.appArgocd.sourceRepo }}"
+    targetRevision: "{{ .Values.appArgocd.gitRevision }}"
+    path: keycloak-operator
+
+    helm:
+      valueFiles:
+        - values.yaml
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: "{{ .Values.appArgocd.destinationServer }}"
+    namespace: "{{ .Values.duIdentityManager.namespace }}"
+
+  # Sync policy
+  syncPolicy:
+  {{- .Values.global.syncPolicy | toYaml | nindent 4}}
