@@ -40,7 +40,7 @@ spec:
   # Destination cluster and namespace to deploy the application
   destination:
     server: "{{ .Values.appArgocd.destinationServer }}"
-
+    namespace: "{{ .Values.appArgocd.namespace }}"
   # Sync policy
   syncPolicy:
   {{- .Values.global.syncPolicy | toYaml | nindent 4}}

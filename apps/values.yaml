@@ -4,6 +4,7 @@ appArgocd:
   sourceRepo: "https://github.com/Elinork91/helm-template"
   destinationServer: https://kubernetes.default.svc
   projectName: "default"
+  namespace: "default"
 
 monitoring:
   enableDeploy: true
