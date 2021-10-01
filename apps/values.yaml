@@ -1,9 +1,9 @@
 appArgocd:
-  gitRevision: "final" #-> alpha | beta | rc | final | vX.X.X
+  gitRevision: "HEAD" #-> alpha | beta | rc | final | vX.X.X
   hostDomain: {}
-  sourceRepo: "PLACE_HOLDER"
+  sourceRepo: " https://github.com/Elinork91/helm-template"
   destinationServer: https://kubernetes.default.svc
-  projectName: "PLACE_HOLDER"
+  projectName: "localSvil"
 
 monitoring:
   enableDeploy: true
