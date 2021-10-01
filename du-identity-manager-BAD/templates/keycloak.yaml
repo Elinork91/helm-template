@@ -1,0 +1,19 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: {{ include "du-identity-manager.fullname" . }}
+  labels:
+  {{- include "du-identity-manager.labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.replicaCount }}
+  externalAccess:
+    enabled: {{ .Values.keycloak.externalAccess.enabled }}
+  externalDatabase:
+    enabled: True
+  keycloakDeploymentSpec:
+    experimental:
+      args:
+        - "-Djboss.as.management.blocking.timeout=600"
+      env:
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
