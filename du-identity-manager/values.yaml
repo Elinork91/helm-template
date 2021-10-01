@@ -11,7 +11,7 @@ image:
   # The Keycloak image repository
   repository: docker.io/jboss/keycloak
   # Overrides the Keycloak image tag whose default is the chart version
-  tag: "11.0.3"
+  tag: ""
   # The Keycloak image pull policy
   pullPolicy: IfNotPresent
 
