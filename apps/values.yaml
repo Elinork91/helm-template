@@ -1,7 +1,7 @@
 appArgocd:
   gitRevision: "HEAD" #-> alpha | beta | rc | final | vX.X.X
   hostDomain: {}
-  sourceRepo: " https://github.com/Elinork91/helm-template"
+  sourceRepo: "https://github.com/Elinork91/helm-template"
   destinationServer: https://kubernetes.default.svc
   projectName: "default"
 
