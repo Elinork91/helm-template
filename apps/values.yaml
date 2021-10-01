@@ -3,7 +3,7 @@ appArgocd:
   hostDomain: {}
   sourceRepo: " https://github.com/Elinork91/helm-template"
   destinationServer: https://kubernetes.default.svc
-  projectName: "localSvil"
+  projectName: "default"
 
 monitoring:
   enableDeploy: true
