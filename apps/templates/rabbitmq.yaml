@@ -33,16 +33,4 @@ spec:
     server: "{{ .Values.appArgocd.destinationServer }}"
     namespace: "{{ .Values.rabbitmq.namespace }}"
 
-  # Sync policy
-  syncPolicy:
-  {{- .Values.global.syncPolicy | toYaml | nindent 4}}
-
-  ignoreDifferences:
-  - group: cert-manager.io
-    kind: Certificate
-    name: rabbitmq
-    jsonPointers:
-    - /spec/renewBefore
-    - /spec/duration
-
 {{- end }}
