@@ -1,0 +1,48 @@
+{{- if .Values.rabbitmq.enableDeploy }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rabbitmq-{{ .Values.appArgocd.projectName }}
+  namespace: argocd
+  labels:
+    argo-project: "argo-{{ .Values.appArgocd.projectName }}"
+spec:
+  project: "{{ .Values.appArgocd.projectName }}"
+
+  source:
+    repoURL: "{{ .Values.appArgocd.sourceRepo }}"
+    targetRevision: "{{ .Values.appArgocd.gitRevision }}"
+    path: rabbitmq
+
+    # helm specific config
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: rabbitmq.ingress.host
+          value: {{ .Values.publicDomain }}
+        - name: rabbitmq.username
+          value: {{ .Values.rabbitmq.username }}
+        - name: rabbitmq.password
+          value: {{ .Values.rabbitmq.password }}
+        - name: rabbitmq.ingress.annotations.kubernetes\.io\/ingress\.class
+          value: {{ .Values.ingressClass }}
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: "{{ .Values.appArgocd.destinationServer }}"
+    namespace: "{{ .Values.rabbitmq.namespace }}"
+
+  # Sync policy
+  syncPolicy:
+  {{- .Values.global.syncPolicy | toYaml | nindent 4}}
+
+  ignoreDifferences:
+  - group: cert-manager.io
+    kind: Certificate
+    name: rabbitmq
+    jsonPointers:
+    - /spec/renewBefore
+    - /spec/duration
+
+{{- end }}

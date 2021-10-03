@@ -24,3 +24,13 @@ monitoring:
 global:
   syncPolicy:
     {}
+
+publicDomain: 'konica-local.com'
+
+rabbitmq:
+  namespace: rabbitmq
+  enableDeploy: true
+  username: "admin"
+  password: "admin"
+
+ingressClass: nginx-admin
