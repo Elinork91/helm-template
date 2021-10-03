@@ -46,8 +46,8 @@ livenessProbe:
 ## DaemonSet configuration
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 daemonset:
-  useHostNetwork: false   # also modify dnsPolicy accordingly
-  useHostPort: false
+  useHostNetwork: true   # also modify dnsPolicy accordingly
+  useHostPort: true
   hostPorts:
     http: 80
     https: 443
