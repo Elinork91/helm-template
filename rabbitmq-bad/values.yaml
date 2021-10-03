@@ -1,0 +1,6 @@
+rabbitmq:
+    username: "admin"
+    password: "admin"
+    ingress:
+        host: "konica-local.com"
+
