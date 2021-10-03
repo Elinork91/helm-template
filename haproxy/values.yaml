@@ -52,7 +52,7 @@ daemonset:
     http: 80
     https: 443
     stat: 1024
-    argocd: 8080
+    argocd: 8083
 
 ## Init Containers
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
