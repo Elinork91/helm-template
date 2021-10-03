@@ -231,11 +231,11 @@ service:
 
   ## Service ClusterIP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/
-  clusterIP: "172.21.78.144"
+  clusterIP: "10.96.0.1"
 
   ## LoadBalancer IP
   ## ref: https://kubernete s.io/docs/concepts/services-networking/service/#loadbalancer
-  loadBalancerIP: ""
+  loadBalancerIP: "10.96.0.1"
 
   ## Source IP ranges permitted to access Network Load Balancer
   # ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
