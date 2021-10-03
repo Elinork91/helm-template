@@ -2,34 +2,22 @@ argo-cd:
   installCRDs: false
   global:
     image:
-      tag: v2.1.3
-#      tag: v1.8.4
+#      tag: v2.1.3
+      tag: v1.8.4
   dex:
     enabled: true
     connectors:
-      # GitHub example
-      - type: github
-        id: github
-        name: GitHub
-        config:
-          clientID: aabbccddeeff00112233
-          clientSecret: $dex.github.clientSecret
-          orgs:
-          - name: your-github-org
+    - config:
+        clientID: system:serviceaccount:argocd:argocd-dex-server
+        clientSecret: <secret>
+        insecureCA: true
+      id: openshift
+      name: OpenShift
+      type: openshift
 
   server:
     extraArgs:
       - --insecure
-#      -  --auth-mode=sso
-    sso:
-      issuer: http://<keycloak_ip>/auth/realms/demo
-      clientId:
-        name: argo
-        key: client-id
-      clientSecret:
-        name: "argo-server-sso"
-        key: client-secret
-      redirectUrl: https://workflows.company.com/argo/oauth2/callback
     config:
       repositories: |
         - type: helm
