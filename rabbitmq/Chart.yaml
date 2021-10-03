@@ -6,5 +6,5 @@ version: 0.1.0
 
 dependencies:
   - name: rabbitmq
-    version: 3.8.0
-    repository: https://github.com/bitnami/bitnami-docker-rabbitmq
+    version: 2.1.0
+    repository: https://charts.bitnami.com/bitnami
