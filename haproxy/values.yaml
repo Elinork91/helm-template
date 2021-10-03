@@ -47,11 +47,12 @@ livenessProbe:
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 daemonset:
   useHostNetwork: true   # also modify dnsPolicy accordingly
-  useHostPort: true
+  useHostPort: false
   hostPorts:
     http: 80
     https: 443
     stat: 1024
+    argocd: 8080
 
 ## Init Containers
 ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
@@ -83,6 +84,7 @@ containerPorts:   # has to match hostPorts when useHostNetwork is true
   http: 80
   https: 443
   stat: 1024
+  argocd: 8080
 
 ## Deployment strategy definition
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
