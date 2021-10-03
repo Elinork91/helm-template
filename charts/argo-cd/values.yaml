@@ -19,6 +19,16 @@ argo-cd:
   server:
     extraArgs:
       - --insecure
+      -  --auth-mode=sso
+    sso:
+      issuer: http://<keycloak_ip>/auth/realms/demo
+      clientId:
+        name: argo
+        key: client-id
+      clientSecret:
+        name: "argo-server-sso"
+        key: client-secret
+      redirectUrl: https://workflows.company.com/argo/oauth2/callback
     config:
       repositories: |
         - type: helm
