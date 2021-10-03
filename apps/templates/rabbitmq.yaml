@@ -3,6 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: rabbitmq-{{ .Values.appArgocd.projectName }}
+  namespace: default
   labels:
     argo-project: "argo-{{ .Values.appArgocd.projectName }}"
 spec:

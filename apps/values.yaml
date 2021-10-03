@@ -28,7 +28,7 @@ global:
 publicDomain: 'konica-local.com'
 
 rabbitmq:
-  namespace: rabbitmq
+  namespace: default
   enableDeploy: true
   username: "admin"
   password: "admin"
