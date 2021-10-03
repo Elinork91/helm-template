@@ -1,38 +1,19 @@
-{{- if .Values.rabbitmq.enableDeploy }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rabbitmq
-  namespace: default
-  labels:
-    argo-project: "argo-{{ .Values.appArgocd.projectName }}"
+  name: root
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
-  project: "{{ .Values.appArgocd.projectName }}"
-
-  source:
-    repoURL: "{{ .Values.appArgocd.sourceRepo }}"
-    targetRevision: "{{ .Values.appArgocd.gitRevision }}"
-    path: rabbitmq
-
-    # helm specific config
-    helm:
-      valueFiles:
-        - values.yaml
-      parameters:
-        - name: rabbitmq.ingress.host
-          value: {{ .Values.publicDomain }}
-        - name: rabbitmq.username
-          value: {{ .Values.rabbitmq.username }}
-        - name: rabbitmq.password
-          value: {{ .Values.rabbitmq.password }}
-        - name: rabbitmq.ingress.annotations.kubernetes\.io\/ingress\.class
-          value: {{ .Values.ingressClass }}
-    syncPolicy:
-      automated:
-        prune: true
-  # Destination cluster and namespace to deploy the application
   destination:
-    server: "{{ .Values.appArgocd.destinationServer }}"
-    namespace: "{{ .Values.rabbitmq.namespace }}"
-
-{{- end }}
+    server: https://kubernetes.default.svc
+    namespace: default
+  project: default
+  source:
+    path: rabbitmq/
+    repoURL: https://github.com/Elinork91/helm-template
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
