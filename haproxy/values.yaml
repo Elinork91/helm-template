@@ -46,7 +46,7 @@ livenessProbe:
 ## DaemonSet configuration
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 daemonset:
-  useHostNetwork: true   # also modify dnsPolicy accordingly
+  useHostNetwork: false   # also modify dnsPolicy accordingly
   useHostPort: true
   hostPorts:
     http: 80
@@ -168,7 +168,7 @@ dnsConfig: {}
 ## Pod DNS Policy
 ## Change this to ClusterFirstWithHostNet in case you have useHostNetwork set to true
 ## ref: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
-dnsPolicy: ClusterFirstWithHostNet
+dnsPolicy: ClusterFirst
 
 ## Additional labels to add to the pod container metadata
 ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -227,7 +227,7 @@ PodDisruptionBudget:
 ## Service configuration
 ## ref: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
-  type: LoadBalancer   # can be 'LoadBalancer'
+  type: ClusterIP   # can be 'LoadBalancer'
 
   ## Service ClusterIP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/
@@ -235,7 +235,7 @@ service:
 
   ## LoadBalancer IP
   ## ref: https://kubernete s.io/docs/concepts/services-networking/service/#loadbalancer
-  loadBalancerIP: "10.96.0.5"
+  loadBalancerIP: ""
 
   ## Source IP ranges permitted to access Network Load Balancer
   # ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
