@@ -235,7 +235,7 @@ service:
 
   ## LoadBalancer IP
   ## ref: https://kubernete s.io/docs/concepts/services-networking/service/#loadbalancer
-  loadBalancerIP: "172.21.78.144"
+  loadBalancerIP: ""
 
   ## Source IP ranges permitted to access Network Load Balancer
   # ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
