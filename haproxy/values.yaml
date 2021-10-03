@@ -227,15 +227,15 @@ PodDisruptionBudget:
 ## Service configuration
 ## ref: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
-  type: ClusterIP   # can be 'LoadBalancer'
+  type: LoadBalancer   # can be 'LoadBalancer'
 
   ## Service ClusterIP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/
-  clusterIP: "10.96.0.5"
+  clusterIP: ""
 
   ## LoadBalancer IP
   ## ref: https://kubernete s.io/docs/concepts/services-networking/service/#loadbalancer
-  loadBalancerIP: ""
+  loadBalancerIP: "10.96.0.5"
 
   ## Source IP ranges permitted to access Network Load Balancer
   # ref: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
