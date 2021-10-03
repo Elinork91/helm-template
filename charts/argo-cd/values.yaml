@@ -4,7 +4,18 @@ argo-cd:
     image:
       tag: v1.8.4
   dex:
-    enabled: false
+    enabled: true
+    connectors:
+      # GitHub example
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: aabbccddeeff00112233
+          clientSecret: $dex.github.clientSecret
+          orgs:
+          - name: your-github-org
+
   server:
     extraArgs:
       - --insecure
