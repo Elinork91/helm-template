@@ -231,7 +231,7 @@ service:
 
   ## Service ClusterIP
   ## ref: https://kubernetes.io/docs/concepts/services-networking/service/
-  clusterIP: "localhost"
+  clusterIP: "127.0.0.1"
 
   ## LoadBalancer IP
   ## ref: https://kubernete s.io/docs/concepts/services-networking/service/#loadbalancer
