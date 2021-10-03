@@ -19,7 +19,7 @@ argo-cd:
   server:
     extraArgs:
       - --insecure
-      -  --auth-mode=sso
+#      -  --auth-mode=sso
     sso:
       issuer: http://<keycloak_ip>/auth/realms/demo
       clientId:
