@@ -1,3 +1,7 @@
+global:
+  image:
+    pullPolicy: IfNotPresent
+
 rabbitmq:
     username: "admin"
     password: "admin"
