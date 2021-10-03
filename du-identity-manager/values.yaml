@@ -628,6 +628,7 @@ clients:
       {
         "clientId": "grafana",
         "rootUrl": "http://grafana.monitoring.svc.cluster.local:3000/",
+        "baseUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
@@ -671,6 +672,7 @@ clients:
       {
         "clientId": "rabbitmq",
         "rootUrl": "http://grafana.monitoring.svc.cluster.local:3000/",
+        "baseUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "surrogateAuthRequired": false,
         "enabled": true,
