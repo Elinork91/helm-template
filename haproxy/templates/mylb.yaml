@@ -1,9 +1,19 @@
-service:
-  type: LoadBalancer
+apiVersion: v1
+kind: DaemonSet
+containerPorts:
+  http: 80
+  https: 443
+  stat: 1024
+daemonset:
+  useHostNetwork: true
+  useHostPort: true
+  hostPorts:
+    http: 80
+    https: 443
+    stat: 1024
 config: |
   global
     log stdout format raw local0
-    daemon
     maxconn 1024
   defaults
     log global
@@ -11,11 +21,20 @@ config: |
     timeout connect 60s
     timeout server 60s
   frontend fe_main
-    mode http
     bind :80
-    bind :443 ssl crt /usr/local/etc/ssl/tls.crt
-    http-request redirect scheme https code 301 unless { ssl_fc }
     default_backend be_main
   backend be_main
-    mode http
-    server web1 10.0.0.1:8080 check
+    server web1 127.0.0.1:8080 check
+securityContext:
+  enabled: true
+  runAsUser: 1000
+  runAsGroup: 1000
+initContainers:
+  - name: sysctl
+    image: "busybox:musl"
+    command:
+      - /bin/sh
+      - -c
+      - sysctl -w net.ipv4.ip_unprivileged_port_start=0
+    securityContext:
+      privileged: true
