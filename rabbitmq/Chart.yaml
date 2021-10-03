@@ -8,3 +8,4 @@ dependencies:
   - name: rabbitmq
     version: 2.1.0
     repository: https://charts.bitnami.com/bitnami
+  pullPolicy: IfNotPresent
