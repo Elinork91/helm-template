@@ -29,7 +29,7 @@ global:
 image:
   registry: docker.io
   repository: bitnami/rabbitmq
-  tag: 3.8.1-debian-10-r0
+  tag: 3.8.1-r21
 
   ## set to true if you would like to see extra information on logs
   ## It turns BASH and/or NAMI debugging in the image
@@ -196,9 +196,9 @@ communityPlugins: ""
 ## @param extraPlugins Extra plugins to enable (single string containing a space-separated list)
 ## Use this instead of `plugins` to add new plugins
 ##
-extraPlugins: |-
-  rabbitmq_auth_backend_ldap
-  rabbitmq_auth_backend_oauth2
+extraPlugins: |
+rabbitmq_auth_backend_ldap
+rabbitmq_auth_backend_oauth2
 
 ## Clustering settings
 ##
