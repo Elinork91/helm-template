@@ -197,8 +197,8 @@ communityPlugins: ""
 ## Use this instead of `plugins` to add new plugins
 ##
 extraPlugins: |
-rabbitmq_auth_backend_ldap
-rabbitmq_auth_backend_oauth2
+  rabbitmq_auth_backend_ldap
+  rabbitmq_auth_backend_oauth2
 
 ## Clustering settings
 ##
