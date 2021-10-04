@@ -198,7 +198,6 @@ communityPlugins: ""
 ##
 extraPlugins: |
   rabbitmq_auth_backend_ldap
-  rabbitmq_auth_backend_oauth2
 
 ## Clustering settings
 ##
