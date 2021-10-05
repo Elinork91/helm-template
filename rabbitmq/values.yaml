@@ -398,7 +398,23 @@ extraVolumes: []
 ##         ...
 ##       }
 ##
-extraSecrets: {}
+extraSecrets:
+  load-definition:
+    load_definition.json: |
+      {
+        "users": [
+          {
+            "name": "operator",
+            "password": "12345",
+            "tags": "operator"
+          }
+        ],
+        "vhosts": [
+          {
+            "name": "/"
+          }
+        ]
+      }
 ## @param extraSecretsPrependReleaseName Set this flag to true if extraSecrets should be created with <release-name> prepended.
 ##
 extraSecretsPrependReleaseName: false
