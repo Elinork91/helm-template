@@ -404,7 +404,7 @@ extraSecrets:
           {
             "name": "operator",
             "password": "12345",
-            "tags": "operator"
+            "tags": "administrator"
           }
         ],
         "vhosts": [
