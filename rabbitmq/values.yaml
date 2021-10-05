@@ -405,6 +405,11 @@ extraSecrets:
             "name": "operator",
             "password": "12345",
             "tags": "administrator"
+          },
+          {
+            "name": "monitoring",
+            "password": "12345",
+            "tags": "administrator"
           }
         ],
         "vhosts": [
