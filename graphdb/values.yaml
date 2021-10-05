@@ -229,7 +229,7 @@ graphdb:
       # -- Name reference prefix of a persistent volume to which the claim will try to attach. If changed, the default PVs won't be used.
       # Example result: graphdb-default-worker-1-pv
 #      volumeNamePrefix: graphdb-default-worker
-      storageClass: hostpath
+      storageClass: "hostpath"
 #      # -- Storage size request for each worker. The persistent volume has to be able to satisfy the size.
 #      storage: 10G
       # use dynamic volume provisioning
