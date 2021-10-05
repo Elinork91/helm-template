@@ -225,14 +225,8 @@ clustering:
 ## Loading a RabbitMQ definitions file to configure RabbitMQ
 ##
 loadDefinition:
-  ## @param loadDefinition.enabled Enable loading a RabbitMQ definitions file to configure RabbitMQ
-  ##
-  enabled: false
-  ## @param loadDefinition.existingSecret Existing secret with the load definitions file
-  ## Can be templated if needed, e.g:
-  ## existingSecret: "{{ .Release.Name }}-load-definition"
-  ##
-  existingSecret: ""
+  enabled: true
+  existingSecret: load-definition
 
 ## @param command Override default container command (useful when using custom images)
 ##
@@ -333,7 +327,7 @@ extraConfiguration: |-
   #default_vhost = {{ .Release.Namespace }}-vhost
   #disk_free_limit.absolute = 50MB
   #load_definitions = /app/load_definition.json
-
+  load_definitions = /app/load_definition.json
 ## @param advancedConfiguration Configuration file content: advanced configuration
 ## Use this as additional configuration in classic config format (Erlang term configuration format)
 ##
