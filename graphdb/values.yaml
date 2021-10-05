@@ -8,7 +8,7 @@
 
 global:
   imagePullSecrets: []
-  storageClass: "standard"
+  storageClass: "hostpath"
   imageRegistry: docker.io
 
 # K8S API versions differ on Kubernetes and local Minikube installation.
