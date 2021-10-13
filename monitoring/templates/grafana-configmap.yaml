@@ -15,6 +15,9 @@ data:
     auth_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/auth
     token_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/token
     api_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/userinfo
+    [session]
+    cookie_secure = false
+
 ---
 
 kind: ConfigMap
