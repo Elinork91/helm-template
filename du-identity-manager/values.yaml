@@ -664,8 +664,7 @@ clients:
           "saml.authnstatement": "false",
           "display.on.consent.screen": "false",
           "saml.onetimeuse.condition": "false"
-        },
-        "realmRoles": ["Admin", "Editor","Viewer"],
+        }
       }
   - name: rabbitmq
     realm: cspadmin
@@ -936,6 +935,7 @@ users:
       lastName: "speriamochefunzioni"
       email: "operator@speriamochefunzioni.org"
       enabled: True
+      realmRoles: ["Admin", "Editor","Viewer"]
       credentials:
         - type: "password"
           value: "12345"
