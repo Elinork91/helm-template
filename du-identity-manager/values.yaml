@@ -938,7 +938,7 @@ users:
       lastName: "speriamochefunzioni"
       email: "operator@speriamochefunzioni.org"
       enabled: True
-      realmRoles: ["Admin", "Editor","Viewer"]
+      clientRoles: ["Admin", "Editor","Viewer"]
       credentials:
         - type: "password"
           value: "12345"
