@@ -630,6 +630,9 @@ clients:
         "rootUrl": "http://grafana.monitoring.svc.cluster.local:3000/",
         "baseUrl": "http://grafana.monitoring.svc.cluster.local:3000",
         "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
+        "defaultRoles": [
+            "Admin","Editor","Viewer"
+        ],
         "surrogateAuthRequired": false,
         "enabled": true,
         "clientAuthenticatorType": "client-secret",
