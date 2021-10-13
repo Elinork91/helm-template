@@ -664,7 +664,8 @@ clients:
           "saml.authnstatement": "false",
           "display.on.consent.screen": "false",
           "saml.onetimeuse.condition": "false"
-        }
+        },
+        "realmRoles": ["Admin", "Editor","Viewer"],
       }
   - name: rabbitmq
     realm: cspadmin
