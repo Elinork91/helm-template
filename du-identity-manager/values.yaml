@@ -654,6 +654,21 @@ clients:
         "publicClient": false,
         "frontchannelLogout": false,
         "protocol": "openid-connect",
+        "protocolMappers": [
+          {
+            "name": "client roles",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-client-role-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "resource_access.${client_id}.roles",
+              "jsonType.label": "String"
+            }
+          }
+        ],
         "attributes": {
           "saml.assertion.signature": "false",
           "saml.multivalued.roles": "false",
