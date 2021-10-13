@@ -71,7 +71,7 @@ spec:
             name: grafana-dashboards-location-config
           name: grafana-dashboards-location-config-volume
         - configMap:
-            name: grafana-config-volume
+            name: grafana-config
           name: grafana-config-volume-volume
 ---
 apiVersion: apps/v1

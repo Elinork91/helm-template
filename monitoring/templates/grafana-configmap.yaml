@@ -16,6 +16,7 @@ data:
     token_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/token
     api_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/userinfo
 ---
+
 kind: ConfigMap
 metadata:
   name: grafana-datasources-config
