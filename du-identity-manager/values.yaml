@@ -939,7 +939,7 @@ users:
       email: "operator@speriamochefunzioni.org"
       enabled: True
       clientRoles: {
-              "grafana": ["Admin"]
+              "grafana": ["Admin","Viewer"]
       }
       credentials:
         - type: "password"
