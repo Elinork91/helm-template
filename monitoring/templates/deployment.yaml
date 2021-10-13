@@ -70,6 +70,9 @@ spec:
         - configMap:
             name: grafana-dashboards-location-config
           name: grafana-dashboards-location-config-volume
+        - configMap:
+            name: grafana-config-volume
+          name: grafana-config-volume-volume
 ---
 apiVersion: apps/v1
 kind: StatefulSet
