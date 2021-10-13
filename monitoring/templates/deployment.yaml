@@ -24,9 +24,7 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: GF_SERVER_ROOT_URL
-              value: "http://localhost:3000/grafana/"
-            - name: GF_USERS_ALLOW_SIGN_UP
+           - name: GF_USERS_ALLOW_SIGN_UP
               value: {{ default .Values.grafana.userSignup .Values.global.grafana.userSignup | quote}}
             - name: GF_AUTH_ANONYMOUS_ENABLED
               value: {{ default .Values.grafana.anonymousAccess .Values.global.grafana.anonymousAccess | quote}}
