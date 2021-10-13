@@ -627,9 +627,9 @@ clients:
     client:
       {
         "clientId": "grafana",
-        "rootUrl": "http://kubernetes.docker.internal:3000/",
-        "baseUrl": "http://kubernetes.docker.internal:3000/",
-        "adminUrl": "http://kubernetes.docker.internal:3000/",
+        "rootUrl": "http://konica-local:3000/",
+        "baseUrl": "http://konica-local:3000/",
+        "adminUrl": "http://konica-local:3000/",
         "defaultRoles": [
             "Admin","Editor","Viewer"
         ],
@@ -639,7 +639,7 @@ clients:
         "secret": "7721f50e-f57d-490f-ae93-e53a79f5408e",
         "redirectUris": [
             "http://localhost:3000/*",
-            "http://kubernetes.docker.internal:3000/*"
+            "http://konica-local:3000/*"
         ],
         "webOrigins": [
             "http://grafana.monitoring.svc.cluster.local:3000"
