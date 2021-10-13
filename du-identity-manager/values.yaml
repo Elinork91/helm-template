@@ -938,7 +938,9 @@ users:
       lastName: "speriamochefunzioni"
       email: "operator@speriamochefunzioni.org"
       enabled: True
-      clientRoles: ["Admin", "Editor","Viewer"]
+      clientRoles: {
+              "grafana": ["Admin"]
+      }
       credentials:
         - type: "password"
           value: "12345"
