@@ -1,0 +1,55 @@
+{{- if .Values.grafana.ingress.enabled -}}
+  {{- if .Capabilities.APIVersions.Has "networking.k8s.io/v1" -}}
+apiVersion: networking.k8s.io/v1
+  {{- else if .Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" -}}
+apiVersion: networking.k8s.io/v1beta1
+  {{- else -}}
+apiVersion: extensions/v1beta1
+  {{- end }}
+kind: Ingress
+metadata:
+  name: {{ .Chart.Name }}-grafana
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  {{- with .Values.grafana.ingress.annotations }}
+{{ toYaml . | indent 4 }}
+  {{- end }}
+  labels:
+    app: grafana
+  {{- if .Capabilities.APIVersions.Has "networking.k8s.io/v1" }}
+spec:
+    {{- if hasKey .Values.grafana.ingress "tls" }}
+  tls: 
+      {{- with .Values.grafana.ingress.tls }}
+{{ toYaml . | indent 4 }}
+      {{- end }}
+    {{- end }}
+
+  rules:
+    - http:
+        paths:
+          - path: /grafana/?(.*)
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+            pathType: ImplementationSpecific
+    {{- if .Values.grafana.ingress.host }}
+      host: {{.Values.grafana.ingress.host }}
+    {{- end }}
+  {{- else }}
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /grafana/?(.*)
+            backend:
+              serviceName: grafana
+              servicePort: 3000
+    {{- if .Values.grafana.ingress.host }}
+      host: {{.Values.grafana.ingress.host }}
+    {{- end }}
+  {{- end -}}
+{{- end}}
