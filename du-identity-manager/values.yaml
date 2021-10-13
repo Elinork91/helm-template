@@ -627,9 +627,9 @@ clients:
     client:
       {
         "clientId": "grafana",
-        "rootUrl": "http://grafana.monitoring.svc.cluster.local:3000/",
-        "baseUrl": "http://grafana.monitoring.svc.cluster.local:3000",
-        "adminUrl": "http://grafana.monitoring.svc.cluster.local:3000",
+        "rootUrl": "http://localhost:3000/",
+        "baseUrl": "http://localhost:3000",
+        "adminUrl": "http://localhost:3000",
         "defaultRoles": [
             "Admin","Editor","Viewer"
         ],

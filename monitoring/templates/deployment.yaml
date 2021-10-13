@@ -51,6 +51,8 @@ spec:
               mountPath: /var/lib/grafana/dashboards
             - name: grafana-dashboards-config-volume
               mountPath: /etc/grafana/provisioning/dashboards
+            - name: grafana-config-volume
+              mountPath: /etc/grafana/
       {{- with .Values.grafana.deployment.imagePullSecrets }}
       imagePullSecrets:
       {{- toYaml . | nindent 8 }}

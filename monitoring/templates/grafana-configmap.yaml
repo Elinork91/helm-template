@@ -1,6 +1,23 @@
 ---
 kind: ConfigMap
 metadata:
+name: grafana-config-volume
+apiVersion: v1
+data:
+grafana.ini: |+
+[auth.generic_oauth]
+enabled = true
+name = KeyCloak
+allow_sign_up = true
+client_id = grafana
+client_secret = 7721f50e-f57d-490f-ae93-e53a79f5408e
+scopes = openid email profile
+auth_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/auth
+token_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/token
+api_url = http://localhost:8443/auth/realms/cspadmin/protocol/openid-connect/userinfo
+---
+kind: ConfigMap
+metadata:
   name: grafana-datasources-config
 apiVersion: v1
 data:
