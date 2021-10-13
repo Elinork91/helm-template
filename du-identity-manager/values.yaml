@@ -627,9 +627,9 @@ clients:
     client:
       {
         "clientId": "grafana",
-        "rootUrl": "http://kubernetes.docker.internal:3000/grafana",
-        "baseUrl": "http://kubernetes.docker.internal:3000/grafana",
-        "adminUrl": "http://kubernetes.docker.internal:3000/grafana",
+        "rootUrl": "http://kubernetes.docker.internal:3000/",
+        "baseUrl": "http://kubernetes.docker.internal:3000/",
+        "adminUrl": "http://kubernetes.docker.internal:3000/",
         "defaultRoles": [
             "Admin","Editor","Viewer"
         ],
