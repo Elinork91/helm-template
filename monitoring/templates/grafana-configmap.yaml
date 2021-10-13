@@ -1,7 +1,7 @@
 ---
 kind: ConfigMap
 metadata:
-  name: grafana-config-volume
+  name: grafana-config
 apiVersion: v1
 data:
   grafana.ini: |+
