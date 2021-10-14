@@ -628,7 +628,7 @@ clients:
       {
         "clientId": "grafana",
         "rootUrl": "http://konica-local:3000/",
-        "baseUrl": "/",
+        "baseUrl": "",
         "adminUrl": "http://konica-local:3000/",
         "defaultRoles": [
             "Admin","Editor","Viewer"
