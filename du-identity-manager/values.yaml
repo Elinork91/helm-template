@@ -662,6 +662,7 @@ clients:
             "consentRequired": false,
             "config": {
               "userinfo.token.claim": "true",
+              "multivalued": "true",
               "id.token.claim": "true",
               "access.token.claim": "true",
               "claim.name": "resource_access.${client_id}.roles",
